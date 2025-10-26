@@ -3,6 +3,8 @@ import { GET_EPISODES } from "@/graphql/queries"
 import { EpisodeProps, EpisodesData } from "@/interfaces"
 import EpisodeCard from "../components/common/EpisodeCard"
 import { useEffect, useState } from "react"
+import ErrorBoundary from "@/components/ErrorBoundary"
+import ErrorProneComponent from "@/components/ErrorProneComponent"
 
 
 
@@ -25,6 +27,7 @@ const Home: React.FC = () => {
   const info = data?.episodes?.info ?? { pages: 1, next: null, prev: null, count: 0 };
 
   return (
+    <ErrorBoundary>
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#A3D5E0] to-[#F4F4F4] text-gray-800">
       {/* Header */}
       <header className="bg-[#4CA1AF] text-white py-6 text-center shadow-md">
@@ -32,6 +35,7 @@ const Home: React.FC = () => {
         <p className="mt-2 text-lg italic">Explore the multiverse of adventures!</p>
       </header>
 
+      <ErrorProneComponent></ErrorProneComponent>
       {/* Main Content */}
       <main className="flex-grow p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -66,6 +70,7 @@ const Home: React.FC = () => {
         <p>&copy; 2024 Rick and Morty Fan Page</p>
       </footer>
     </div>
+    </ErrorBoundary>
   )
 }
 
